@@ -1,9 +1,7 @@
-"""
-DPStyler++ : Loss Functions
-============================
-  1. DomainUncertaintyLoss  – original from DPStyler (entropy maximisation)
+""""
+  1. DomainUncertaintyLoss  
   2. DualObjectiveLoss      – Improvement 3 (inter-domain var ↓, inter-class var ↑)
-  3. ArcFaceLoss            – original from DPStyler
+  3. ArcFaceLoss            –
   4. TotalLoss              – combines all three
 """
 
@@ -13,9 +11,8 @@ import torch.nn.functional as F
 import math
 
 
-# ---------------------------------------------------------------------------
-# 1.  Domain Uncertainty Loss  (unchanged from DPStyler)
-# ---------------------------------------------------------------------------
+# 1.  Domain Uncertainty Loss  
+
 class DomainUncertaintyLoss(nn.Module):
     """
     Entropy maximisation over style predictions.
@@ -48,9 +45,9 @@ class DomainUncertaintyLoss(nn.Module):
         return loss
 
 
-# ---------------------------------------------------------------------------
+
 # 2.  Dual-Objective Channel Refinement Loss  (Improvement 3 – CLIPCEIL idea)
-# ---------------------------------------------------------------------------
+
 class DualObjectiveLoss(nn.Module):
     """
     Two complementary objectives on the style-removed features:
@@ -102,9 +99,8 @@ class DualObjectiveLoss(nn.Module):
         return L_intra - self.lambda_inter * L_inter
 
 
-# ---------------------------------------------------------------------------
-# 3.  ArcFace Loss  (unchanged from DPStyler)
-# ---------------------------------------------------------------------------
+# 3.  ArcFace Loss  
+
 class ArcFaceLoss(nn.Module):
     """
     Additive angular margin loss.
@@ -159,9 +155,9 @@ class ArcFaceLoss(nn.Module):
         return (features @ W) * self.scale
 
 
-# ---------------------------------------------------------------------------
+
 # 4.  Total Loss  (combines all components)
-# ---------------------------------------------------------------------------
+
 class TotalLoss(nn.Module):
     """
     L_total = w_domain * L_U  +  w_dual * L_dual  +  w_cls * L_cls
