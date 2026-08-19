@@ -119,10 +119,7 @@ class DPStylerPlusPlus(nn.Module):
     @torch.no_grad()
     def _encode_prompts(self, template, style_vectors):
         """
-        Encode all (class x style) prompts in ONE batched encode_text call.
-        This is the correct DPStyler approach — fast and accurate.
-
-        For each class we:
+         For each class we:
           1. Build the base prompt  e.g. "a dog in a distinctive style"
           2. Tokenize it once
           3. Patch the embedding table at dummy_id with each style vector
