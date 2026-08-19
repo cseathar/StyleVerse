@@ -40,7 +40,7 @@ class DPStylerPlusPlus(nn.Module):
                  margin         = 0.5,
                  templates      = None,
                  llm_api_key    = None,
-                 llm_num_styles = 200):
+                 llm_num_styles = 200): #Adjust
 
         super().__init__()
 
